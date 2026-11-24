@@ -1,17 +1,5 @@
 <script setup>
-import { ref } from 'vue'
-
-const isMenuOpen = ref(false)
-
-const toggleMenu = () => {
-  isMenuOpen.value = !isMenuOpen.value
-}
-
-const closeMenu = () => {
-  isMenuOpen.value = false
-}
-
-const navItems = [
+const navLinks = [
   { label: 'About', href: '#about' },
   { label: 'Expertise', href: '#expertise' },
   { label: 'Clients', href: '#clients' },
@@ -22,31 +10,18 @@ const navItems = [
 </script>
 
 <template>
-  <header class="site-header" :class="{ 'site-header--menu-open': isMenuOpen }">
-    <a class="btn btn--outline-sm site-header__contact" href="#contact">Contact Us</a>
+  <header class="site-header">
+    <a class="btn btn--outline-subtle site-header__contact" href="#contact">Contact Us</a>
 
-    <a class="site-header__logo" href="/" aria-label="AXSA Investment Partners – Home">
-      <span class="site-header__wordmark">AXSA</span>
-      <span class="site-header__descriptor">Investment Partners</span>
+    <a class="site-header__logo" href="/" aria-label="AXSA Investment Partners, home">
+      <span class="site-header__logo-mark">AXSA</span>
+      <span class="site-header__logo-descriptor">INVESTMENT PARTNERS</span>
     </a>
 
-    <button
-      class="site-header__toggle"
-      type="button"
-      aria-controls="primary-nav"
-      :aria-expanded="isMenuOpen ? 'true' : 'false'"
-      :aria-label="isMenuOpen ? 'Close menu' : 'Open menu'"
-      @click="toggleMenu"
-    >
-      <span class="site-header__toggle-bar" aria-hidden="true"></span>
-      <span class="site-header__toggle-bar" aria-hidden="true"></span>
-      <span class="site-header__toggle-bar" aria-hidden="true"></span>
-    </button>
-
-    <nav id="primary-nav" class="site-header__nav" aria-label="Primary">
+    <nav class="site-header__nav" aria-label="Primary">
       <ul class="site-header__nav-list">
-        <li v-for="item in navItems" :key="item.label">
-          <a class="site-header__nav-link" :href="item.href" @click="closeMenu">{{ item.label }}</a>
+        <li v-for="link in navLinks" :key="link.href">
+          <a class="site-header__nav-link" :href="link.href">{{ link.label }}</a>
         </li>
       </ul>
     </nav>

@@ -13,13 +13,14 @@ h2,
 h3,
 p,
 ul,
-dl,
-dd {
+ol,
+figure {
   margin: 0;
   padding: 0;
 }
 
-ul {
+ul,
+ol {
   list-style: none;
 }
 
@@ -30,7 +31,7 @@ html {
 body {
   min-height: 100vh;
   background-color: $color-ink;
-  color: $color-sand;
+  color: $color-text-nav;
   font-family: $font-sans;
   font-weight: $font-weight-regular;
   line-height: $line-height-normal;
@@ -49,14 +50,29 @@ svg {
   max-width: 100%;
 }
 
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
   border: 0;
+  cursor: pointer;
+}
+
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
 }

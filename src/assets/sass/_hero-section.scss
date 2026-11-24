@@ -5,55 +5,53 @@
 .hero {
   position: relative;
   min-height: $hero-height;
-  padding: $space-130 $space-64 $space-48;
-  background-color: $color-ink;
   overflow: hidden;
+  background-color: $color-ink;
 
-  &__photo {
+  &__image {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
+    max-width: none;
     object-fit: cover;
   }
 
   &__scrim {
     position: absolute;
     inset: 0;
-    background: $scrim-gradient;
+    background: linear-gradient(
+      90deg,
+      $scrim-stop-1 0%,
+      $scrim-stop-2 35%,
+      $scrim-stop-3 65%,
+      $scrim-stop-4 100%
+    );
   }
 
-  &__copy {
+  &__content {
     @include flex(column, flex-start, flex-start, $space-28);
+    @include section-padding-x;
     position: relative;
+    z-index: 1;
     max-width: $hero-copy-width;
+    padding-top: $space-130;
+    padding-bottom: $space-64;
+    box-sizing: content-box;
   }
 
   &__eyebrow {
-    @include text($font-sans, $font-size-11, $color-gold, $letter-spacing-eyebrow);
-    text-transform: uppercase;
-  }
-
-  // Keep each term (e.g. "Future-Focused") together instead of breaking at the hyphen
-  &__eyebrow-term {
-    white-space: nowrap;
+    @include text-sans($font-size-xs, $color-gold, $letter-spacing-eyebrow);
   }
 
   &__headline {
-    @include text($font-serif, $font-size-72, $color-ivory);
+    @include text-display($font-size-hero, $color-text-heading);
     max-width: $hero-headline-width;
   }
 
   &__subhead {
-    @include text($font-sans, $font-size-17, $color-stone);
+    @include text-sans($font-size-body-lg, $color-text-body);
     max-width: $hero-subhead-width;
-  }
-
-  // Figma uses a fixed 63px-tall subhead box, which places the buttons at y 570
-  @include desktop {
-    &__subhead {
-      min-height: $hero-subhead-height;
-    }
   }
 
   &__actions {
@@ -61,30 +59,83 @@
     flex-wrap: wrap;
   }
 
-  @include tablet {
-    padding: $space-64 $space-24 $space-48;
+  &__sr-only {
+    @include visually-hidden;
+  }
 
+  // Loading skeleton
+  &__skeleton {
+    @include skeleton;
+    display: block;
+
+    &--eyebrow {
+      width: $hero-eyebrow-width;
+      max-width: 100%;
+      height: $hero-eyebrow-height;
+    }
+
+    &--headline {
+      width: $hero-headline-width;
+      max-width: 100%;
+      height: $hero-headline-height;
+    }
+
+    &--subhead {
+      width: $hero-subhead-width;
+      max-width: 100%;
+      height: $hero-subhead-height;
+    }
+
+    &--actions {
+      width: $hero-actions-width;
+      max-width: 100%;
+      height: $hero-actions-height;
+    }
+  }
+
+  // Error state
+  &__status {
+    @include text-sans($font-size-body-lg, $color-text-body);
+    max-width: $hero-subhead-width;
+  }
+
+  @include tablet {
     &__headline {
-      font-size: $font-size-48;
+      font-size: $font-size-hero-tablet;
     }
   }
 
   @include mobile {
-    min-height: 0;
-    padding: $space-48 $space-24;
+    min-height: auto;
 
-    &__headline {
-      font-size: $font-size-40;
+    &__content {
+      max-width: none;
+      padding: $space-64 $space-24 $space-56;
+      gap: $space-24;
     }
 
     &__eyebrow {
-      font-size: $font-size-12;
-      letter-spacing: $letter-spacing-eyebrow-mobile;
-      line-height: $line-height-eyebrow-mobile;
+      letter-spacing: $letter-spacing-descriptor;
+    }
+
+    &__headline {
+      font-size: $font-size-hero-mobile;
     }
 
     &__subhead {
-      font-size: $font-size-14;
+      font-size: $font-size-body-mobile;
+    }
+
+    &__actions {
+      width: 100%;
+
+      .btn {
+        flex: 1 1 100%;
+      }
+    }
+
+    &__scrim {
+      background: linear-gradient(180deg, $scrim-stop-2 0%, $scrim-stop-1 100%);
     }
   }
 }

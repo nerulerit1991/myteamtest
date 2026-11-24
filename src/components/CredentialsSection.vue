@@ -1,25 +1,40 @@
 <script setup>
-const stats = [
-  { value: 'MAS', label: 'Licensed & regulated', modifier: '' },
-  { value: 'CMS101290', label: 'Capital Markets Services Licence', modifier: 'md' },
-  { value: '06', label: 'Core expertise areas', modifier: '' },
-  { value: 'Global', label: 'Accredited investors worldwide', modifier: 'lg' }
-]
+defineProps({
+  credentials: { type: Array, default: () => [] },
+  isLoading: { type: Boolean, default: false },
+  error: { type: String, default: null }
+})
+
+defineEmits(['retry'])
+
+const SKELETON_COUNT = 4
 </script>
 
 <template>
-  <section class="credentials" aria-labelledby="credentials-heading">
-    <h2 id="credentials-heading" class="visually-hidden">Credentials</h2>
-    <dl class="credentials__list">
-      <div v-for="stat in stats" :key="stat.value" class="credentials__item">
-        <dt
-          class="credentials__value"
-          :class="stat.modifier && `credentials__value--${stat.modifier}`"
-        >
-          {{ stat.value }}
-        </dt>
-        <dd class="credentials__label">{{ stat.label }}</dd>
-      </div>
-    </dl>
+  <section class="credentials" aria-labelledby="credentials-heading" :aria-busy="isLoading">
+    <h2 id="credentials-heading" class="credentials__title">Our credentials</h2>
+
+    <ul v-if="isLoading" class="credentials__list" aria-hidden="true">
+      <li v-for="n in SKELETON_COUNT" :key="n" class="credentials__stat">
+        <span class="credentials__skeleton credentials__skeleton--value"></span>
+        <span class="credentials__skeleton credentials__skeleton--label"></span>
+      </li>
+    </ul>
+
+    <div v-else-if="error" class="credentials__status" role="alert">
+      <p>{{ error }}</p>
+      <button type="button" class="credentials__retry" @click="$emit('retry')">Try again</button>
+    </div>
+
+    <p v-else-if="!credentials.length" class="credentials__status">
+      No credentials to display yet.
+    </p>
+
+    <ul v-else class="credentials__list">
+      <li v-for="item in credentials" :key="item.id" class="credentials__stat">
+        <p :class="['credentials__value', `credentials__value--${item.id}`]">{{ item.value }}</p>
+        <p v-if="item.label" class="credentials__label">{{ item.label }}</p>
+      </li>
+    </ul>
   </section>
 </template>

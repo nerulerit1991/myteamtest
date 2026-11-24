@@ -2,13 +2,17 @@
 @use 'mixins' as *;
 
 .btn {
-  @include button-base;
+  @include flex(row, center, center);
+  @include focus-ring;
+  border-radius: $radius-none;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 
-  &--outline-sm {
+  // Header "Contact Us": 12px 24px, 1px subtle gold border
+  &--outline-subtle {
+    @include text-sans($font-size-nav, $color-gold);
     padding: $space-12 $space-24;
-    font-size: $font-size-13;
-    color: $color-gold;
-    background-color: transparent;
+    background-color: $color-transparent;
     border: $border-width solid $color-gold-border-subtle;
 
     &:hover {
@@ -16,23 +20,22 @@
     }
   }
 
+  // Hero primary: solid gold, 16px 28px
   &--primary {
+    @include text-sans($font-size-button, $color-ink);
     padding: $space-16 $space-28;
-    font-size: $font-size-14;
-    color: $color-ink;
     background-color: $color-gold;
-    border: 0;
 
     &:hover {
-      background-color: $color-ivory;
+      background-color: $color-text-heading;
     }
   }
 
+  // Hero secondary: 1px gold border (40%), 16px 28px
   &--secondary {
+    @include text-sans($font-size-button, $color-gold);
     padding: $space-16 $space-28;
-    font-size: $font-size-14;
-    color: $color-gold;
-    background-color: transparent;
+    background-color: $color-transparent;
     border: $border-width solid $color-gold-border;
 
     &:hover {

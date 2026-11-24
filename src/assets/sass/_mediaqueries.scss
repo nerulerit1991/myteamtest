@@ -1,4 +1,4 @@
-// Breakpoints (checker viewports)
+// Breakpoints match the QA checker viewports.
 $bp-tablet: 768px;
 $bp-desktop: 1024px;
 
@@ -9,19 +9,19 @@ $bp-desktop: 1024px;
 }
 
 @mixin tablet {
-  @media (min-width: #{$bp-tablet}) and (max-width: #{$bp-desktop - 1px}) {
+  @media (min-width: $bp-tablet) and (max-width: #{$bp-desktop - 1px}) {
     @content;
   }
 }
 
-@mixin below-desktop {
+@mixin tablet-down {
   @media (max-width: #{$bp-desktop - 1px}) {
     @content;
   }
 }
 
 @mixin desktop {
-  @media (min-width: #{$bp-desktop}) {
+  @media (min-width: $bp-desktop) {
     @content;
   }
 }

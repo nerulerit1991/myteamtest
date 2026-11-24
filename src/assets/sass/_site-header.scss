@@ -4,21 +4,23 @@
 
 .site-header {
   @include flex(row, center, space-between, $space-40);
-  height: $header-height;
-  padding: $space-24 $space-64;
+  @include section-padding-x;
+  min-height: $header-height;
+  padding-top: $space-24;
+  padding-bottom: $space-24;
   background-color: $color-ink;
 
   &__logo {
     @include flex(row, center, flex-start, $space-25);
+    @include focus-ring;
   }
 
-  &__wordmark {
-    @include text($font-serif, $font-size-26, $color-gold, $letter-spacing-logo);
+  &__logo-mark {
+    @include text-display($font-size-logo, $color-gold, $letter-spacing-logo);
   }
 
-  &__descriptor {
-    @include text($font-sans, $font-size-10, $color-taupe, $letter-spacing-descriptor);
-    text-transform: uppercase;
+  &__logo-descriptor {
+    @include text-sans($font-size-2xs, $color-text-subtle, $letter-spacing-descriptor);
     white-space: nowrap;
   }
 
@@ -27,29 +29,37 @@
   }
 
   &__nav-link {
-    @include text($font-sans, $font-size-13, $color-sand);
+    @include text-sans($font-size-nav, $color-text-nav);
+    @include focus-ring;
     white-space: nowrap;
     transition: color 0.2s ease;
 
-    &:hover,
-    &:focus-visible {
+    &:hover {
       color: $color-gold;
     }
   }
 
-  @include below-desktop {
+  @include tablet-down {
     flex-wrap: wrap;
-    height: auto;
-    row-gap: $space-16;
-    padding: $space-24;
+    row-gap: $space-24;
 
     &__logo {
-      order: -1;
+      order: 1;
+    }
+
+    &__contact {
+      order: 2;
     }
 
     &__nav {
+      order: 3;
       width: 100%;
       overflow-x: auto;
+      scrollbar-width: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
     }
 
     &__nav-list {
@@ -58,81 +68,17 @@
     }
   }
 
-  // Hamburger toggle: only shown on mobile
-  &__toggle {
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    gap: $space-6;
-    width: $toggle-size;
-    height: $toggle-size;
-    padding: 0 $space-6;
-    background: transparent;
-    border: $border-width solid $color-gold-border;
-    cursor: pointer;
-
-    &:focus-visible {
-      outline: $border-width solid $color-gold;
-      outline-offset: 3px;
-    }
-  }
-
-  &__toggle-bar {
-    display: block;
-    width: 100%;
-    height: $border-width;
-    background-color: $color-gold;
-    transition: transform 0.2s ease, opacity 0.2s ease;
-  }
-
   @include mobile {
-    &__descriptor {
-      display: none;
-    }
+    padding-left: $space-24;
+    padding-right: $space-24;
+    column-gap: $space-16;
 
     &__logo {
-      flex: 1 1 auto;
+      gap: $space-12;
     }
 
-    &__contact {
-      order: 0;
-    }
-
-    &__toggle {
-      display: inline-flex;
-      order: 1;
-    }
-
-    &__nav {
+    &__logo-descriptor {
       display: none;
-      order: 2;
-      overflow-x: visible;
-    }
-
-    &__nav-list {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: $space-16;
-      padding-top: $space-16;
-      border-top: $hairline solid $color-gold-hairline;
-    }
-
-    &--menu-open &__nav {
-      display: block;
-    }
-
-    &--menu-open &__toggle-bar {
-      &:nth-child(1) {
-        transform: translateY(calc(#{$space-6} + #{$border-width})) rotate(45deg);
-      }
-
-      &:nth-child(2) {
-        opacity: 0;
-      }
-
-      &:nth-child(3) {
-        transform: translateY(calc(-1 * (#{$space-6} + #{$border-width}))) rotate(-45deg);
-      }
     }
   }
 }

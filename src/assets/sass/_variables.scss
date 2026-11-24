@@ -1,47 +1,57 @@
-// Design tokens from Figma: "Homepage / Desktop 1440" (node 1137:2)
+// Design tokens from Figma frame "Homepage / Desktop 1440" (node 1137:2)
 
 // Colors
-$color-gold: #c6a15b;
-$color-gold-border-subtle: rgba(198, 161, 91, 0.15); // #C6A15B26
-$color-gold-border: rgba(198, 161, 91, 0.4); // #C6A15B66
-$color-gold-hairline: rgba(198, 161, 91, 0.25); // #C6A15B40
 $color-ink: #0a0a0b;
-$color-ivory: #ede8de;
-$color-sand: #d8d2c6;
-$color-stone: #9a948a;
-$color-taupe: #8a8378;
+$color-gold: #c6a15b;
+$color-gold-border-subtle: #c6a15b26;
+$color-gold-border: #c6a15b66;
+$color-gold-hairline: #c6a15b40;
+$color-text-heading: #ede8de;
+$color-text-nav: #d8d2c6;
+$color-text-body: #9a948a;
+$color-text-subtle: #8a8378;
+$color-transparent: #0a0a0b00;
 
-$scrim-gradient: linear-gradient(
-  90deg,
-  rgba(10, 10, 11, 0.96) 0%,
-  rgba(10, 10, 11, 0.88) 35%,
-  rgba(10, 10, 11, 0.45) 70%,
-  rgba(10, 10, 11, 0.12) 100%
-);
+// Hero scrim gradient stops
+$scrim-stop-1: #0a0a0bf5;
+$scrim-stop-2: #0a0a0be0;
+$scrim-stop-3: #0a0a0b73;
+$scrim-stop-4: #0a0a0b1f;
 
-// Typography
-$font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
-$font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+// Font families
+$font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+$font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+
+// Font weights
 $font-weight-regular: 400;
+
+// Font sizes
+$font-size-2xs: 10px; // logo descriptor
+$font-size-xs: 11px; // hero eyebrow
+$font-size-sm: 12px; // stat labels
+$font-size-nav: 13px; // nav links, header button
+$font-size-button: 14px; // hero buttons
+$font-size-body-lg: 17px; // hero subhead
+$font-size-logo: 26px;
+$font-size-stat-sm: 40px;
+$font-size-stat-md: 44px;
+$font-size-stat: 48px;
+$font-size-hero: 72px;
+
+// Responsive (non-desktop) font sizes
+$font-size-body-mobile: 15px;
+$font-size-stat-xs: 34px;
+$font-size-stat-mobile-md: 38px;
+$font-size-hero-mobile: 40px;
+$font-size-hero-tablet: 56px;
+
+// Line heights
 $line-height-normal: normal;
 
-$font-size-10: 10px;
-$font-size-11: 11px;
-$font-size-12: 12px;
-$font-size-13: 13px;
-$font-size-14: 14px;
-$font-size-17: 17px;
-$font-size-26: 26px;
-$font-size-40: 40px;
-$font-size-44: 44px;
-$font-size-48: 48px;
-$font-size-72: 72px;
-
-$letter-spacing-logo: 5px;
+// Letter spacing
 $letter-spacing-descriptor: 2.5px;
 $letter-spacing-eyebrow: 4px;
-$letter-spacing-eyebrow-mobile: 3px;
-$line-height-eyebrow-mobile: 1.6;
+$letter-spacing-logo: 5px;
 
 // Spacing
 $space-6: 6px;
@@ -56,14 +66,28 @@ $space-56: 56px;
 $space-64: 64px;
 $space-130: 130px;
 
+// Borders / radii
+$border-width: 1px;
+$radius-none: 0;
+
 // Sizes
-$container-width: 1440px;
+$container-max: 1440px;
 $header-height: 88px;
 $hero-height: 620px;
 $hero-copy-width: 700px;
 $hero-headline-width: 680px;
 $hero-subhead-width: 620px;
-$hero-subhead-height: 63px; // fixed text box height in Figma (node 1137:2)
-$toggle-size: 40px;
-$hairline: 1px;
-$border-width: 1px;
+$hairline-height: 1px;
+
+// Element heights from Figma (used by loading skeletons / state blocks)
+$hero-eyebrow-width: 364px;
+$hero-eyebrow-height: 13px;
+$hero-headline-height: 192px;
+$hero-subhead-height: 63px;
+$hero-actions-width: 371px;
+$hero-actions-height: 52px;
+$stat-height: 85px;
+$stat-value-height: 64px;
+$stat-value-width: 120px;
+$stat-label-height: 15px;
+$stat-label-width: 160px;

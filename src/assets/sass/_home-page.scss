@@ -1,7 +1,14 @@
 @use 'variables' as *;
 
 .home-page {
-  max-width: $container-width;
+  max-width: $container-max;
   margin: 0 auto;
   background-color: $color-ink;
+
+  &__divider {
+    height: $hairline-height;
+    margin: 0;
+    border: 0;
+    background-color: $color-gold-hairline;
+  }
 }
