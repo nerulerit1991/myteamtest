@@ -1,15 +1,7 @@
 <template>
-  <div>
-    <h1>Hello Vue 3</h1>
-  </div>
+  <HomePage />
 </template>
 
 <script setup>
-export default {
-  name: 'App'
-}
+import HomePage from './pages/HomePage.vue'
 </script>
-
-<style>
-h1 { color: #42b983; }
-</style>

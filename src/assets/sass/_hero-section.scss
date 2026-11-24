@@ -1,0 +1,94 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+@use 'mediaqueries' as *;
+
+.hero {
+  position: relative;
+  min-height: $hero-height;
+  overflow: hidden;
+  background-color: $color-ink;
+
+  &__photo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__scrim {
+    position: absolute;
+    inset: 0;
+    background: $hero-scrim;
+  }
+
+  &__copy {
+    @include flex(column, flex-start, flex-start, $space-28);
+    position: relative;
+    // 700px copy column (Figma "Hero / Copy Column") plus 64px side padding.
+    max-width: $hero-copy-width + $space-64 * 2;
+    padding: $space-130 $space-64 $space-48;
+  }
+
+  &__eyebrow {
+    @include text($font-sans, $font-size-11, $color-gold, $tracking-eyebrow);
+  }
+
+  &__headline {
+    @include text($font-serif, $font-size-72, $color-cream);
+    max-width: $hero-headline-width;
+  }
+
+  &__subhead {
+    @include text($font-sans, $font-size-17, $color-muted);
+    width: 100%;
+    max-width: $hero-subhead-width;
+    // Reserve the Figma text-box height so the actions land at y 570.
+    min-height: $hero-subhead-height;
+  }
+
+  &__actions {
+    @include flex(row, center, flex-start, $space-16);
+  }
+
+  @include tablet {
+    &__copy {
+      padding: $space-64 $space-40;
+    }
+
+    &__headline {
+      font-size: $font-size-48;
+    }
+  }
+
+  @include mobile {
+    min-height: 0;
+
+    &__scrim {
+      background: rgba($color-ink, 0.85);
+    }
+
+    &__copy {
+      padding: $space-48 $space-24;
+    }
+
+    &__eyebrow {
+      letter-spacing: $tracking-descriptor;
+    }
+
+    &__headline {
+      font-size: $font-size-40;
+    }
+
+    &__subhead {
+      font-size: $font-size-14 + 1px;
+      min-height: 0;
+    }
+
+    &__actions {
+      flex-direction: column;
+      align-items: stretch;
+      width: 100%;
+    }
+  }
+}

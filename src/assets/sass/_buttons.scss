@@ -1,0 +1,26 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.btn {
+  @include button-base($space-16 $space-28);
+  @include text($font-sans, $font-size-14, $color-gold);
+  @include focus-ring;
+
+  &--primary {
+    background-color: $color-gold;
+    color: $color-ink;
+
+    &:hover {
+      background-color: $color-cream;
+    }
+  }
+
+  &--secondary {
+    background-color: transparent;
+    border: $hairline solid $color-gold-border;
+
+    &:hover {
+      border-color: $color-gold;
+    }
+  }
+}

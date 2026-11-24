@@ -1,0 +1,83 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+@use 'mediaqueries' as *;
+
+.site-header {
+  @include flex(row, center, space-between, $space-40);
+  min-height: $header-height;
+  padding: $space-24 $space-64;
+  background-color: $color-ink;
+
+  &__contact {
+    @include button-base($space-12 $space-24);
+    @include text($font-sans, $font-size-13, $color-gold);
+    @include focus-ring;
+    border: $hairline solid $color-gold-border-subtle;
+
+    &:hover {
+      border-color: $color-gold;
+    }
+  }
+
+  &__logo {
+    @include flex(row, center, flex-start, $space-25);
+    @include focus-ring;
+  }
+
+  &__logo-mark {
+    @include text($font-serif, $font-size-26, $color-gold, $tracking-logo);
+  }
+
+  &__logo-descriptor {
+    @include text($font-sans, $font-size-10, $color-taupe, $tracking-descriptor);
+  }
+
+  &__nav-list {
+    @include flex(row, center, flex-end, $space-40);
+  }
+
+  &__nav-link {
+    @include text($font-sans, $font-size-13, $color-sand);
+    @include focus-ring;
+    white-space: nowrap;
+
+    &:hover {
+      color: $color-gold;
+    }
+  }
+
+  // Fixed 88px bar on desktop; the 42px Contact button overflows the 24px padding by 1px, as in Figma.
+  @include desktop {
+    height: $header-height;
+  }
+
+  @include tablet-down {
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: $space-16;
+    padding: $space-24;
+
+    &__logo {
+      order: -1;
+      width: 100%;
+      justify-content: center;
+    }
+
+    &__nav {
+      width: 100%;
+    }
+
+    &__nav-list {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: $space-12 $space-24;
+    }
+  }
+
+  @include mobile {
+    &__logo {
+      flex-direction: column;
+      gap: $space-6;
+    }
+  }
+}

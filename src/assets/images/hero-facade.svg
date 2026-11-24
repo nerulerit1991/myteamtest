@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 620" preserveAspectRatio="xMidYMid slice">
+  <!-- Placeholder facade; replace with the exported "Photo / Hero Facade" image from Figma. -->
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2a2621"/>
+      <stop offset="1" stop-color="#121113"/>
+    </linearGradient>
+    <pattern id="mullions" width="48" height="62" patternUnits="userSpaceOnUse">
+      <rect width="48" height="62" fill="none"/>
+      <path d="M0 0V62M0 0H48" stroke="#c6a15b" stroke-opacity="0.18" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1440" height="620" fill="url(#sky)"/>
+  <rect x="760" y="0" width="680" height="620" fill="url(#mullions)"/>
+  <rect x="980" y="0" width="2" height="620" fill="#c6a15b" fill-opacity="0.25"/>
+  <rect x="1220" y="0" width="2" height="620" fill="#c6a15b" fill-opacity="0.25"/>
+</svg>
