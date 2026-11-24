@@ -4,11 +4,4 @@
   max-width: $container-width;
   margin: 0 auto;
   background-color: $color-ink;
-
-  &__divider {
-    height: $hairline;
-    margin: 0;
-    border: 0;
-    background-color: $color-gold-hairline;
-  }
 }

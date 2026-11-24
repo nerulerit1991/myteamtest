@@ -2,22 +2,38 @@
 @use 'mixins' as *;
 
 .btn {
-  @include button-base($space-16 $space-28);
-  @include text($font-sans, $font-size-14, $color-gold);
-  @include focus-ring;
+  @include button-base;
 
-  &--primary {
-    background-color: $color-gold;
-    color: $color-ink;
+  &--outline-sm {
+    padding: $space-12 $space-24;
+    font-size: $font-size-13;
+    color: $color-gold;
+    background-color: transparent;
+    border: $border-width solid $color-gold-border-subtle;
 
     &:hover {
-      background-color: $color-cream;
+      border-color: $color-gold;
+    }
+  }
+
+  &--primary {
+    padding: $space-16 $space-28;
+    font-size: $font-size-14;
+    color: $color-ink;
+    background-color: $color-gold;
+    border: 0;
+
+    &:hover {
+      background-color: $color-ivory;
     }
   }
 
   &--secondary {
+    padding: $space-16 $space-28;
+    font-size: $font-size-14;
+    color: $color-gold;
     background-color: transparent;
-    border: $hairline solid $color-gold-border;
+    border: $border-width solid $color-gold-border;
 
     &:hover {
       border-color: $color-gold;

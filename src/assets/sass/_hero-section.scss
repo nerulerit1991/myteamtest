@@ -5,8 +5,9 @@
 .hero {
   position: relative;
   min-height: $hero-height;
-  overflow: hidden;
+  padding: $space-130 $space-64 $space-48;
   background-color: $color-ink;
+  overflow: hidden;
 
   &__photo {
     position: absolute;
@@ -19,42 +20,49 @@
   &__scrim {
     position: absolute;
     inset: 0;
-    background: $hero-scrim;
+    background: $scrim-gradient;
   }
 
   &__copy {
     @include flex(column, flex-start, flex-start, $space-28);
     position: relative;
-    // 700px copy column (Figma "Hero / Copy Column") plus 64px side padding.
-    max-width: $hero-copy-width + $space-64 * 2;
-    padding: $space-130 $space-64 $space-48;
+    max-width: $hero-copy-width;
   }
 
   &__eyebrow {
-    @include text($font-sans, $font-size-11, $color-gold, $tracking-eyebrow);
+    @include text($font-sans, $font-size-11, $color-gold, $letter-spacing-eyebrow);
+    text-transform: uppercase;
+  }
+
+  // Keep each term (e.g. "Future-Focused") together instead of breaking at the hyphen
+  &__eyebrow-term {
+    white-space: nowrap;
   }
 
   &__headline {
-    @include text($font-serif, $font-size-72, $color-cream);
+    @include text($font-serif, $font-size-72, $color-ivory);
     max-width: $hero-headline-width;
   }
 
   &__subhead {
-    @include text($font-sans, $font-size-17, $color-muted);
-    width: 100%;
+    @include text($font-sans, $font-size-17, $color-stone);
     max-width: $hero-subhead-width;
-    // Reserve the Figma text-box height so the actions land at y 570.
-    min-height: $hero-subhead-height;
+  }
+
+  // Figma uses a fixed 63px-tall subhead box, which places the buttons at y 570
+  @include desktop {
+    &__subhead {
+      min-height: $hero-subhead-height;
+    }
   }
 
   &__actions {
     @include flex(row, center, flex-start, $space-16);
+    flex-wrap: wrap;
   }
 
   @include tablet {
-    &__copy {
-      padding: $space-64 $space-40;
-    }
+    padding: $space-64 $space-24 $space-48;
 
     &__headline {
       font-size: $font-size-48;
@@ -63,32 +71,20 @@
 
   @include mobile {
     min-height: 0;
-
-    &__scrim {
-      background: rgba($color-ink, 0.85);
-    }
-
-    &__copy {
-      padding: $space-48 $space-24;
-    }
-
-    &__eyebrow {
-      letter-spacing: $tracking-descriptor;
-    }
+    padding: $space-48 $space-24;
 
     &__headline {
       font-size: $font-size-40;
     }
 
-    &__subhead {
-      font-size: $font-size-14 + 1px;
-      min-height: 0;
+    &__eyebrow {
+      font-size: $font-size-12;
+      letter-spacing: $letter-spacing-eyebrow-mobile;
+      line-height: $line-height-eyebrow-mobile;
     }
 
-    &__actions {
-      flex-direction: column;
-      align-items: stretch;
-      width: 100%;
+    &__subhead {
+      font-size: $font-size-14;
     }
   }
 }
