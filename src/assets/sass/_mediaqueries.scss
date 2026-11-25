@@ -1,0 +1,33 @@
+// Breakpoints match the checker viewports.
+$breakpoint-mobile-max: 767px;
+$breakpoint-tablet-min: 768px;
+$breakpoint-tablet-max: 1023px;
+$breakpoint-desktop-min: 1024px;
+
+// Up to 767px
+@mixin mobile {
+  @media (max-width: $breakpoint-mobile-max) {
+    @content;
+  }
+}
+
+// 768px – 1023px
+@mixin tablet {
+  @media (min-width: $breakpoint-tablet-min) and (max-width: $breakpoint-tablet-max) {
+    @content;
+  }
+}
+
+// Up to 1023px (mobile + tablet)
+@mixin tablet-down {
+  @media (max-width: $breakpoint-tablet-max) {
+    @content;
+  }
+}
+
+// 1024px and up
+@mixin desktop {
+  @media (min-width: $breakpoint-desktop-min) {
+    @content;
+  }
+}

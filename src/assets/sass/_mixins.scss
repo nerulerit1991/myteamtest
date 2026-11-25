@@ -1,0 +1,42 @@
+@use 'variables' as *;
+
+@mixin flex($direction: row, $align: center, $justify: flex-start, $gap: 0) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: $align;
+  justify-content: $justify;
+  gap: $gap;
+}
+
+@mixin text($family, $size, $color, $letter-spacing: normal) {
+  font-family: $family;
+  font-size: $size;
+  font-weight: $font-weight-regular;
+  line-height: $line-height-normal;
+  letter-spacing: $letter-spacing;
+  color: $color;
+}
+
+@mixin focus-ring {
+  &:focus-visible {
+    outline: $border-width solid $color-gold;
+    outline-offset: $space-2 * 2;
+  }
+}
+
+@mixin visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@mixin page-padding {
+  padding-left: $page-padding-fluid;
+  padding-right: $page-padding-fluid;
+}

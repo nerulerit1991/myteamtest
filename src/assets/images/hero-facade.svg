@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 620" width="1440" height="620" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#4a4339"/>
+      <stop offset="0.6" stop-color="#6e6354"/>
+      <stop offset="1" stop-color="#3a342c"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8f8676"/>
+      <stop offset="0.45" stop-color="#5a5247"/>
+      <stop offset="1" stop-color="#a39886"/>
+    </linearGradient>
+    <linearGradient id="fin" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#d8cbb2"/>
+      <stop offset="1" stop-color="#8a7c66"/>
+    </linearGradient>
+    <linearGradient id="stone" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#b9ad98"/>
+      <stop offset="1" stop-color="#7c705e"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e9c98a" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#e9c98a" stop-opacity="0"/>
+    </linearGradient>
+    <pattern id="fins" width="48" height="620" patternUnits="userSpaceOnUse">
+      <rect width="48" height="620" fill="url(#glass)"/>
+      <rect x="38" width="10" height="620" fill="url(#fin)"/>
+    </pattern>
+    <pattern id="floors" width="48" height="62" patternUnits="userSpaceOnUse">
+      <rect y="56" width="48" height="6" fill="url(#stone)"/>
+    </pattern>
+  </defs>
+  <rect width="1440" height="620" fill="url(#sky)"/>
+  <polygon points="240,620 380,60 620,0 620,620" fill="url(#stone)" opacity="0.55"/>
+  <polygon points="620,620 760,0 1440,0 1440,620" fill="url(#fins)"/>
+  <polygon points="620,620 760,0 1440,0 1440,620" fill="url(#floors)"/>
+  <polygon points="760,0 1440,0 1440,300 900,160" fill="url(#glow)"/>
+  <rect x="1180" y="0" width="8" height="620" fill="#e9c98a" opacity="0.45"/>
+  <rect x="980" y="0" width="4" height="620" fill="#e9c98a" opacity="0.3"/>
+</svg>

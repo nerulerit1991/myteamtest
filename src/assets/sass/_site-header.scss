@@ -1,0 +1,134 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+@use 'mediaqueries' as *;
+
+.site-header {
+  position: relative;
+  z-index: 10;
+  background-color: $color-black;
+
+  &__inner {
+    @include flex(row, center, space-between);
+    @include page-padding;
+    max-width: $container-width;
+    height: $header-height;
+    margin: 0 auto;
+  }
+
+  // Logo lockup — "AXSA" + descriptor, 25px gap
+  &__logo {
+    @include flex(row, center, flex-start, $space-25);
+  }
+
+  &__logo-mark {
+    @include text($font-serif, $font-size-26, $color-gold, $letter-spacing-logo);
+  }
+
+  &__logo-descriptor {
+    @include text($font-sans, $font-size-10, $color-taupe, $letter-spacing-descriptor);
+    white-space: nowrap;
+  }
+
+  &__toggle {
+    display: none;
+    @include text($font-sans, $font-size-13, $color-sand);
+    min-height: 44px;
+    padding: $space-12 $space-16;
+    border: $border-width solid $color-gold-15;
+  }
+
+  &__nav-list {
+    @include flex(row, center, flex-end, $nav-gap-fluid);
+  }
+
+  &__nav-link {
+    @include text($font-sans, $font-size-13, $color-sand);
+    white-space: nowrap;
+    transition: color $transition-base;
+
+    &:hover {
+      color: $color-gold;
+    }
+  }
+
+  &__nav-item--contact {
+    display: none;
+  }
+
+  @include tablet-down {
+    &__inner {
+      gap: $space-16;
+    }
+
+    &__logo {
+      order: 1;
+      margin-right: auto;
+    }
+
+    &__contact {
+      order: 2;
+    }
+
+    &__toggle {
+      display: inline-flex;
+      align-items: center;
+      order: 3;
+    }
+
+    &__nav {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background-color: $color-black;
+      border-top: $border-width solid $color-gold-25;
+      border-bottom: $border-width solid $color-gold-25;
+
+      &.is-open {
+        display: block;
+      }
+    }
+
+    &__nav-list {
+      @include page-padding;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      padding-top: $space-8;
+      padding-bottom: $space-8;
+    }
+
+    &__nav-link {
+      display: block;
+      padding: $space-12 0;
+      font-size: $font-size-14;
+    }
+  }
+
+  @include mobile {
+    &__inner {
+      padding-left: $space-24;
+      padding-right: $space-24;
+    }
+
+    &__logo-descriptor,
+    &__contact {
+      display: none;
+    }
+
+    &__nav-list {
+      padding-left: $space-24;
+      padding-right: $space-24;
+    }
+
+    &__nav-item--contact {
+      display: block;
+      padding: $space-12 0;
+
+      .btn {
+        width: 100%;
+      }
+    }
+  }
+}

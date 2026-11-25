@@ -1,0 +1,45 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+@use 'mediaqueries' as *;
+
+.btn {
+  @include flex(row, center, center);
+  @include text($font-sans, $font-size-14, $color-gold);
+  border-radius: $radius-none;
+  white-space: nowrap;
+  transition: background-color $transition-base, border-color $transition-base, color $transition-base;
+
+  // Header "Contact Us" — 119x42, padding 12px 24px, 1px #C6A15B26
+  &--outline-sm {
+    padding: $space-12 $space-24;
+    font-size: $font-size-13;
+    border: $border-width solid $color-gold-15;
+    background-color: $color-transparent;
+
+    &:hover {
+      border-color: $color-gold;
+    }
+  }
+
+  // Hero "Explore Our Expertise" — 200x49, padding 16px 28px, #C6A15B
+  &--primary {
+    padding: $space-16 $space-28;
+    background-color: $color-gold;
+    color: $color-black;
+
+    &:hover {
+      background-color: $color-ivory;
+    }
+  }
+
+  // Hero "Speak With Us" — 155x51, padding 16px 28px, 1px #C6A15B66
+  &--secondary {
+    padding: $space-16 $space-28;
+    border: $border-width solid $color-gold-40;
+    background-color: $color-transparent;
+
+    &:hover {
+      border-color: $color-gold;
+    }
+  }
+}

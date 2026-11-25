@@ -1,0 +1,101 @@
+// Design tokens from Figma frame "Homepage / Desktop 1440" (node 1137:2).
+// Never hard-code these values elsewhere; use the variables.
+
+// Colors
+$color-black: #0a0a0b;
+$color-gold: #c6a15b;
+$color-gold-15: rgba(198, 161, 91, 0.15); // #C6A15B26
+$color-gold-25: rgba(198, 161, 91, 0.25); // #C6A15B40
+$color-gold-40: rgba(198, 161, 91, 0.4); // #C6A15B66
+$color-ivory: #ede8de;
+$color-sand: #d8d2c6;
+$color-stone: #9a948a;
+$color-taupe: #8a8378;
+$color-transparent: rgba(10, 10, 11, 0);
+
+// Hero scrim gradient (#0A0A0BF5 → #0A0A0BE0 → #0A0A0B73 → #0A0A0B1F)
+$hero-scrim: linear-gradient(
+  90deg,
+  rgba(10, 10, 11, 0.96) 0%,
+  rgba(10, 10, 11, 0.88) 35%,
+  rgba(10, 10, 11, 0.45) 70%,
+  rgba(10, 10, 11, 0.12) 100%
+);
+$hero-scrim-mobile: linear-gradient(
+  180deg,
+  rgba(10, 10, 11, 0.96) 0%,
+  rgba(10, 10, 11, 0.88) 50%,
+  rgba(10, 10, 11, 0.7) 100%
+);
+
+// Font families
+$font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+$font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+
+// Font weights
+$font-weight-regular: 400;
+
+// Line heights
+$line-height-normal: normal;
+
+// Font sizes
+$font-size-10: 10px; // logo descriptor
+$font-size-11: 11px; // hero eyebrow
+$font-size-12: 12px; // stat labels
+$font-size-13: 13px; // nav links, header button
+$font-size-14: 14px; // hero buttons
+$font-size-17: 17px; // hero subhead
+$font-size-26: 26px; // logo mark
+$font-size-40: 40px; // stat value (licence)
+$font-size-44: 44px; // stat value (reach)
+$font-size-48: 48px; // stat value (default)
+$font-size-72: 72px; // hero headline
+
+// Responsive font sizes (derived from the desktop scale)
+$font-size-headline-tablet: 56px;
+$font-size-headline-mobile: 40px;
+$font-size-stat-mobile: 36px;
+
+// Letter spacing
+$letter-spacing-logo: 5px;
+$letter-spacing-descriptor: 2.5px;
+$letter-spacing-eyebrow: 4px;
+
+// Spacing
+$space-2: 2px;
+$space-6: 6px;
+$space-8: 8px;
+$space-12: 12px;
+$space-16: 16px;
+$space-20: 20px;
+$space-24: 24px;
+$space-25: 25px;
+$space-28: 28px;
+$space-32: 32px;
+$space-40: 40px;
+$space-48: 48px;
+$space-56: 56px;
+$space-64: 64px;
+$space-130: 130px;
+
+// Fluid values used between 1024px and 1440px so the nav fits
+$nav-gap-fluid: clamp(#{$space-24}, 2.78vw, #{$space-40});
+$page-padding-fluid: clamp(#{$space-40}, 4.444vw, #{$space-64});
+
+// Sizes
+$container-width: 1440px;
+$header-height: 88px;
+$hero-height: 620px;
+$hero-copy-width: 700px;
+$hero-headline-width: 680px;
+$hero-subhead-width: 620px;
+$hero-subhead-min-height: 63px; // 3 lines of 17px Inter, per Figma
+$divider-height: 1px;
+$border-width: 1px;
+
+// Radii
+$radius-none: 0;
+$radius-sm: 2px;
+
+// Transitions
+$transition-base: 0.2s ease;
