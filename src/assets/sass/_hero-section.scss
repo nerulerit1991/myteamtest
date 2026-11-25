@@ -4,138 +4,129 @@
 
 .hero {
   position: relative;
-  min-height: $hero-height;
+  height: $hero-height;
   overflow: hidden;
-  background-color: $color-ink;
+  background-color: $color-black;
 
   &__image {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
-    max-width: none;
     object-fit: cover;
+    object-position: center;
   }
 
   &__scrim {
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-      90deg,
-      $scrim-stop-1 0%,
-      $scrim-stop-2 35%,
-      $scrim-stop-3 65%,
-      $scrim-stop-4 100%
-    );
+    background: $hero-scrim;
   }
 
-  &__content {
-    @include flex(column, flex-start, flex-start, $space-28);
-    @include section-padding-x;
+  &__inner {
+    @include page-padding;
     position: relative;
-    z-index: 1;
-    max-width: $hero-copy-width;
+    max-width: $container-width;
+    margin: 0 auto;
     padding-top: $space-130;
-    padding-bottom: $space-64;
-    box-sizing: content-box;
+  }
+
+  &__copy {
+    @include flex(column, flex-start, flex-start, $space-28);
+    width: $hero-copy-width;
+    max-width: 100%;
   }
 
   &__eyebrow {
-    @include text-sans($font-size-xs, $color-gold, $letter-spacing-eyebrow);
+    @include text($font-sans, $font-size-11, $color-gold, $letter-spacing-eyebrow);
   }
 
   &__headline {
-    @include text-display($font-size-hero, $color-text-heading);
+    @include text($font-serif, $font-size-72, $color-ivory);
     max-width: $hero-headline-width;
   }
 
   &__subhead {
-    @include text-sans($font-size-body-lg, $color-text-body);
+    @include text($font-sans, $font-size-17, $color-stone);
     max-width: $hero-subhead-width;
+    min-height: $hero-subhead-min-height;
   }
 
   &__actions {
     @include flex(row, center, flex-start, $space-16);
-    flex-wrap: wrap;
   }
 
-  &__sr-only {
-    @include visually-hidden;
-  }
-
-  // Loading skeleton
+  // Loading placeholders (shown until the content service resolves)
   &__skeleton {
-    @include skeleton;
     display: block;
+    background-color: $color-gold-15;
+    border-radius: $radius-sm;
 
     &--eyebrow {
-      width: $hero-eyebrow-width;
+      width: 364px;
       max-width: 100%;
-      height: $hero-eyebrow-height;
+      height: 13px;
     }
 
     &--headline {
       width: $hero-headline-width;
       max-width: 100%;
-      height: $hero-headline-height;
+      height: 192px;
     }
 
     &--subhead {
       width: $hero-subhead-width;
       max-width: 100%;
-      height: $hero-subhead-height;
+      height: $hero-subhead-min-height;
     }
-
-    &--actions {
-      width: $hero-actions-width;
-      max-width: 100%;
-      height: $hero-actions-height;
-    }
-  }
-
-  // Error state
-  &__status {
-    @include text-sans($font-size-body-lg, $color-text-body);
-    max-width: $hero-subhead-width;
   }
 
   @include tablet {
+    &__inner {
+      padding-left: $space-40;
+      padding-right: $space-40;
+    }
+
     &__headline {
-      font-size: $font-size-hero-tablet;
+      font-size: $font-size-headline-tablet;
     }
   }
 
   @include mobile {
-    min-height: auto;
+    height: auto;
 
-    &__content {
-      max-width: none;
+    &__scrim {
+      background: $hero-scrim-mobile;
+    }
+
+    &__inner {
       padding: $space-64 $space-24 $space-56;
+    }
+
+    &__copy {
       gap: $space-24;
     }
 
-    &__eyebrow {
-      letter-spacing: $letter-spacing-descriptor;
-    }
-
     &__headline {
-      font-size: $font-size-hero-mobile;
+      font-size: $font-size-headline-mobile;
     }
 
     &__subhead {
-      font-size: $font-size-body-mobile;
+      min-height: 0;
+    }
+
+    &__skeleton--headline {
+      height: 108px;
     }
 
     &__actions {
+      flex-direction: column;
+      align-items: stretch;
       width: 100%;
 
       .btn {
-        flex: 1 1 100%;
+        width: 100%;
       }
-    }
-
-    &__scrim {
-      background: linear-gradient(180deg, $scrim-stop-2 0%, $scrim-stop-1 100%);
     }
   }
 }

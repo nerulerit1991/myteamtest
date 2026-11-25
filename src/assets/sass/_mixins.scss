@@ -1,6 +1,6 @@
 @use 'variables' as *;
 
-@mixin flex($direction: row, $align: stretch, $justify: flex-start, $gap: 0) {
+@mixin flex($direction: row, $align: center, $justify: flex-start, $gap: 0) {
   display: flex;
   flex-direction: $direction;
   align-items: $align;
@@ -8,8 +8,8 @@
   gap: $gap;
 }
 
-@mixin text-sans($size, $color: inherit, $letter-spacing: normal) {
-  font-family: $font-sans;
+@mixin text($family, $size, $color, $letter-spacing: normal) {
+  font-family: $family;
   font-size: $size;
   font-weight: $font-weight-regular;
   line-height: $line-height-normal;
@@ -17,18 +17,11 @@
   color: $color;
 }
 
-@mixin text-display($size, $color: inherit, $letter-spacing: normal) {
-  font-family: $font-display;
-  font-size: $size;
-  font-weight: $font-weight-regular;
-  line-height: $line-height-normal;
-  letter-spacing: $letter-spacing;
-  color: $color;
-}
-
-@mixin section-padding-x {
-  padding-left: $space-64;
-  padding-right: $space-64;
+@mixin focus-ring {
+  &:focus-visible {
+    outline: $border-width solid $color-gold;
+    outline-offset: $space-2 * 2;
+  }
 }
 
 @mixin visually-hidden {
@@ -43,15 +36,7 @@
   border: 0;
 }
 
-@mixin focus-ring {
-  &:focus-visible {
-    outline: $border-width solid $color-gold;
-    outline-offset: 3px;
-  }
-}
-
-@mixin skeleton {
-  background: linear-gradient(90deg, #{$color-gold-border-subtle}, #{$color-gold-hairline}, #{$color-gold-border-subtle});
-  background-size: 200% 100%;
-  animation: skeleton-shimmer 1.4s ease-in-out infinite;
+@mixin page-padding {
+  padding-left: $page-padding-fluid;
+  padding-right: $page-padding-fluid;
 }

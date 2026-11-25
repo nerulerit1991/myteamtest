@@ -1,37 +1,29 @@
-import { onBeforeUnmount, onMounted, ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { fetchHomeContent } from '../services/homeContent.js'
 
 /**
  * Loads home page content and exposes loading / error state.
  */
 export function useHomeContent() {
-  const hero = ref(null)
-  const credentials = ref([])
+  const content = ref(null)
   const isLoading = ref(true)
   const error = ref(null)
-  let controller = null
 
   async function load() {
-    controller?.abort()
-    controller = new AbortController()
     isLoading.value = true
     error.value = null
 
     try {
-      const content = await fetchHomeContent({ signal: controller.signal })
-      hero.value = content.hero
-      credentials.value = content.credentials
+      content.value = await fetchHomeContent()
     } catch (err) {
-      if (err?.name === 'AbortError') return
-      console.error('[useHomeContent]', err)
-      error.value = 'We could not load this content right now. Please try again.'
+      console.error('[useHomeContent] Failed to load home content:', err)
+      error.value = err instanceof Error ? err : new Error('Unable to load content.')
     } finally {
       isLoading.value = false
     }
   }
 
   onMounted(load)
-  onBeforeUnmount(() => controller?.abort())
 
-  return { hero, credentials, isLoading, error, reload: load }
+  return { content, isLoading, error, reload: load }
 }

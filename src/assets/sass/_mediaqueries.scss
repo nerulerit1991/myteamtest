@@ -1,27 +1,33 @@
-// Breakpoints match the QA checker viewports.
-$bp-tablet: 768px;
-$bp-desktop: 1024px;
+// Breakpoints match the checker viewports.
+$breakpoint-mobile-max: 767px;
+$breakpoint-tablet-min: 768px;
+$breakpoint-tablet-max: 1023px;
+$breakpoint-desktop-min: 1024px;
 
+// Up to 767px
 @mixin mobile {
-  @media (max-width: #{$bp-tablet - 1px}) {
+  @media (max-width: $breakpoint-mobile-max) {
     @content;
   }
 }
 
+// 768px – 1023px
 @mixin tablet {
-  @media (min-width: $bp-tablet) and (max-width: #{$bp-desktop - 1px}) {
+  @media (min-width: $breakpoint-tablet-min) and (max-width: $breakpoint-tablet-max) {
     @content;
   }
 }
 
+// Up to 1023px (mobile + tablet)
 @mixin tablet-down {
-  @media (max-width: #{$bp-desktop - 1px}) {
+  @media (max-width: $breakpoint-tablet-max) {
     @content;
   }
 }
 
+// 1024px and up
 @mixin desktop {
-  @media (min-width: $bp-desktop) {
+  @media (min-width: $breakpoint-desktop-min) {
     @content;
   }
 }

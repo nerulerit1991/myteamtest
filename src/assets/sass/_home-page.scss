@@ -1,14 +1,26 @@
 @use 'variables' as *;
+@use 'mixins' as *;
+@use 'mediaqueries' as *;
 
 .home-page {
-  max-width: $container-max;
-  margin: 0 auto;
-  background-color: $color-ink;
+  min-height: 100vh;
+  background-color: $color-black;
 
-  &__divider {
-    height: $hairline-height;
-    margin: 0;
-    border: 0;
-    background-color: $color-gold-hairline;
+  &__error {
+    @include flex(row, center, space-between, $space-16);
+    @include page-padding;
+    max-width: $container-width;
+    margin: 0 auto;
+    padding-top: $space-16;
+    padding-bottom: $space-16;
+    border-bottom: $border-width solid $color-gold-25;
+    @include text($font-sans, $font-size-14, $color-sand);
+
+    @include mobile {
+      flex-direction: column;
+      align-items: flex-start;
+      padding-left: $space-24;
+      padding-right: $space-24;
+    }
   }
 }

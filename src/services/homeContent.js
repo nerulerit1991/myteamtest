@@ -1,53 +1,28 @@
 /**
  * Home page content service.
  *
- * Every piece of home page data that depends on SCRUM-5 (API) goes through this module.
- * Until SCRUM-5 is done, it returns placeholder data shaped like the Figma design.
- * To connect the real API: set USE_PLACEHOLDER to false, confirm the endpoint path from SCRUM-5,
- * and adjust normalizeHomeContent() to map the real response. Nothing else needs to change.
+ * Every call for home page data lives here. The SCRUM-5 endpoint and response
+ * shape have not been confirmed yet (neither SCRUM-4 nor this codebase defines
+ * them), so this module still returns placeholder data shaped like the Figma design.
+ * To connect the real API, only change `fetchHomeContent` below (e.g. call
+ * `${import.meta.env.VITE_API_BASE_URL}/home`) and map the response with
+ * `normalizeHomeContent` — components and the composable stay unchanged.
  */
 
-const USE_PLACEHOLDER = true
+/** @typedef {{ label: string, href: string }} Cta */
+/** @typedef {{ eyebrow: string, headline: string, subhead: string, primaryCta: Cta, secondaryCta: Cta }} HeroContent */
+/** @typedef {{ id: string, value: string, label: string }} Credential */
+/** @typedef {{ hero: HeroContent, credentials: Credential[] }} HomeContent */
 
-// Base URL comes from the environment (e.g. VITE_API_BASE_URL in .env.local); never hard-code hosts or keys.
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? ''
-
-// TODO(SCRUM-5): assumed endpoint; replace with the path defined in SCRUM-5.
-const HOME_CONTENT_ENDPOINT = '/api/home'
-
-/**
- * @typedef {Object} HeroAction
- * @property {string} label
- * @property {string} href
- * @property {'primary'|'secondary'} variant
- *
- * @typedef {Object} HeroContent
- * @property {string} eyebrow
- * @property {string} headline
- * @property {string} subhead
- * @property {HeroAction[]} actions
- *
- * @typedef {Object} Credential
- * @property {string} id
- * @property {string} value
- * @property {string} label
- *
- * @typedef {Object} HomeContent
- * @property {HeroContent} hero
- * @property {Credential[]} credentials
- */
-
-/** @type {HomeContent} */
+// TODO(SCRUM-5): remove once the real endpoint is connected.
 const PLACEHOLDER_HOME_CONTENT = {
   hero: {
     eyebrow: 'DIRECT · INNOVATIVE · FUTURE-FOCUSED',
     headline: 'Your Partner in Modern Investing.',
     subhead:
       'AXSA is an independent investment management firm serving clients globally. We provide end-to-end investment services to',
-    actions: [
-      { label: 'Explore Our Expertise', href: '#expertise', variant: 'primary' },
-      { label: 'Speak With Us', href: '#contact', variant: 'secondary' }
-    ]
+    primaryCta: { label: 'Explore Our Expertise', href: '#expertise' },
+    secondaryCta: { label: 'Speak With Us', href: '#contact' }
   },
   credentials: [
     { id: 'mas', value: 'MAS', label: 'Licensed & regulated' },
@@ -57,59 +32,48 @@ const PLACEHOLDER_HOME_CONTENT = {
   ]
 }
 
-const asString = (value) => (typeof value === 'string' ? value.trim() : '')
+const asText = (value) => (typeof value === 'string' ? value.trim() : '')
+
+const normalizeCta = (cta) => ({
+  label: asText(cta?.label),
+  href: asText(cta?.href) || '#'
+})
 
 /**
- * Maps an API response to the shape the home page components expect.
- * @param {any} data
+ * Validate and shape raw data so components can rely on it.
+ * @param {unknown} raw
  * @returns {HomeContent}
  */
-export function normalizeHomeContent(data) {
-  const hero = data?.hero ?? {}
-  const actions = Array.isArray(hero.actions) ? hero.actions : []
-  const credentials = Array.isArray(data?.credentials) ? data.credentials : []
+export function normalizeHomeContent(raw) {
+  const hero = raw?.hero ?? {}
+  const credentials = Array.isArray(raw?.credentials) ? raw.credentials : []
 
   return {
     hero: {
-      eyebrow: asString(hero.eyebrow),
-      headline: asString(hero.headline),
-      subhead: asString(hero.subhead),
-      actions: actions
-        .filter((action) => asString(action?.label))
-        .map((action, index) => ({
-          label: asString(action.label),
-          href: asString(action.href) || '#',
-          variant: action.variant === 'secondary' || index > 0 ? 'secondary' : 'primary'
-        }))
+      eyebrow: asText(hero.eyebrow),
+      headline: asText(hero.headline),
+      subhead: asText(hero.subhead),
+      primaryCta: normalizeCta(hero.primaryCta),
+      secondaryCta: normalizeCta(hero.secondaryCta)
     },
     credentials: credentials
-      .filter((item) => asString(String(item?.value ?? '')))
       .map((item, index) => ({
-        id: asString(item.id) || `credential-${index}`,
-        value: asString(String(item.value)),
-        label: asString(item.label)
+        id: asText(item?.id) || `credential-${index}`,
+        value: asText(item?.value),
+        label: asText(item?.label)
       }))
+      .filter((item) => item.value)
   }
 }
 
 /**
- * Fetches the home page content.
- * @param {{ signal?: AbortSignal }} [options]
+ * Fetch home page content.
  * @returns {Promise<HomeContent>}
  */
-export async function fetchHomeContent({ signal } = {}) {
-  if (USE_PLACEHOLDER) {
-    return normalizeHomeContent(structuredClone(PLACEHOLDER_HOME_CONTENT))
-  }
-
-  const response = await fetch(`${API_BASE_URL}${HOME_CONTENT_ENDPOINT}`, {
-    headers: { Accept: 'application/json' },
-    signal
-  })
-
-  if (!response.ok) {
-    throw new Error(`Failed to load home content (HTTP ${response.status})`)
-  }
-
-  return normalizeHomeContent(await response.json())
+export async function fetchHomeContent() {
+  // TODO(SCRUM-5): replace with the real request, e.g.
+  // const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/home`)
+  // if (!response.ok) throw new Error(`Home content request failed (${response.status})`)
+  // return normalizeHomeContent(await response.json())
+  return normalizeHomeContent(structuredClone(PLACEHOLDER_HOME_CONTENT))
 }
